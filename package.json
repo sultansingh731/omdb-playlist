@@ -1,0 +1,12 @@
+{
+  "name": "omdb-playlist",
+  "version": "1.0.0",
+  "description": "omdb playlist assignment by sultan singh",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "run": "node server.js"
+  },
+  "author": "Sutan Singh <sultansingh731@gmail.com>",
+  "license": "ISC"
+}
