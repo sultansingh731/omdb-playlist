@@ -24,8 +24,8 @@
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
             </form>
             <form class="login-form">
-                <input type="email" placeholder="email" required />
-                <input type="password" placeholder="password" required />
+                <input type="email" placeholder="email" id="sign-in-email" required />
+                <input type="password" placeholder="password" id="sign-in-passwd" required />
                 <button id="signInButton">Sign in</button>
                 <p class="message">Not registered? <a href="#">Create an account</a></p>
             </form>
@@ -43,15 +43,15 @@
         signIn = document.querySelector("#signInButton")
         signUp = document.querySelector("#signUpButton")
 
-        signUpName = document.querySelector("#signUpName")
-        signUpEmail = document.querySelector("#signUpEmail")
-        signUpPwd = document.querySelector("#signUpPasswd")
+        signUpName = document.querySelector("#sign-up-name")
+        signUpEmail = document.querySelector("#sign-up-email")
+        signUpPwd = document.querySelector("#sign-up-passwd")
 
-        signInEmail = document.querySelector("#signInEmail")
-        signInPwd = document.querySelector("#signInPasswd")
+        signInEmail = document.querySelector("#sign-in-email")
+        signInPwd = document.querySelector("#sign-in-passwd")
 
         signInUrl = "http://movie-sultan.herokuapp.com/sign-in"
-        signUpUrl = "http://movie-sultan.herokuapp.com/sign-in"
+        signUpUrl = "http://movie-sultan.herokuapp.com/sign-up"
 
         signIn.addEventListener('click', (event) => {
             const data = {
@@ -71,6 +71,8 @@
                     localStorage.loginToken = result.accessToken
                     localStorage.user_data = result.user_data
                     location.pathname = '/'
+                    location.reload()
+
                 }).catch((err) => {
                     localStorage.removeItem('loginToken')
                 })
@@ -96,6 +98,8 @@
                     localStorage.loginToken = result.accessToken
                     localStorage.user_data = result.user_data
                     location.pathname = '/'
+                    location.reload()
+
                 }).catch((err) => {
                     localStorage.removeItem('loginToken')
                 })
