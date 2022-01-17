@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sing Up/Sign In to Movies </title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="login-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form">
+                <input type="text" placeholder="name" id="sign-up-name" required />
+                <input type="email" placeholder="email" id="sign-up-email" required />
+                <input type="password" placeholder="password" id="sign-up-passwd" required />
+                <button id="signUpButton">Sign Up</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form class="login-form">
+                <input type="email" placeholder="email" required />
+                <input type="password" placeholder="password" required />
+                <button id="signInButton">Sign in</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $('.message a').click(function() {
+            $('form').animate({
+                height: "toggle",
+                opacity: "toggle"
+            }, "slow");
+        });
+
+        signIn = document.querySelector("#signInButton")
+        signUp = document.querySelector("#signUpButton")
+
+        signUpName = document.querySelector("#signUpName")
+        signUpEmail = document.querySelector("#signUpEmail")
+        signUpPwd = document.querySelector("#signUpPasswd")
+
+        signInEmail = document.querySelector("#signInEmail")
+        signInPwd = document.querySelector("#signInPasswd")
+
+        signIn.addEventListener('click', (event) => {
+            signInEmail.value
+            signInPwd.value
+
+        })
+
+        signUp.addEventListener('click', (event) => {
+            signUpName.value
+            signUpEmail.value
+            signUpPwd.value
+        })
+
+
+        async function postData(url = 'http://localhost:3450/sign-up',
+            data = {
+                email: "u1@me.in",
+                name: "u1",
+                password: "u2"
+            }
+        ) {
+
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data)
+            })
+
+            return response.json()
+        }
+        postData()
+    </script>
+
+</body>
+
+</html>

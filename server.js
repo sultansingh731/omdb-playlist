@@ -4,33 +4,30 @@ require('dotenv').config()
 
 const jwt = require('jsonwebtoken')
 app.use(express.json())
+app.set("view engine", "ejs")
+app.use(express.static(__dirname + '/views/'))
 
 
-const users = [
-    {
+const users = [{
         "user": "user1",
         "email": "user@dev.in",
         "password": "user1",
         "visibility": "public",
-        "playlist": [
-            {
-                "playlist_name": "play1",
-                "visibility": "public",
-                "movieIdList": ["movei1", "movie2"]
-            }
-        ]
+        "playlist": [{
+            "playlist_name": "play1",
+            "visibility": "public",
+            "movieIdList": []
+        }]
     },
     {
         "user": "sultan",
         "password": "sultan",
         "email": "sultan@dev.in",
-        "playlist": [
-            {
-                "playlist_name": "play1",
-                "visibility": "public",
-                "movieIdList": ["movei1", "movie2"]
-            }
-        ]
+        "playlist": [{
+            "playlist_name": "play1",
+            "visibility": "public",
+            "movieIdList": []
+        }]
     }
 ]
 
@@ -53,6 +50,20 @@ function createPlaylist(playlist_name, private = true, movieId = null) {
     }
 }
 
+app.get('/', (req, res) => {
+    try {
+        res.render("index")
+    } catch (error) {
+
+    }
+})
+app.get('/sign-in', (req, res) => {
+    try {
+        res.render("login")
+    } catch (error) {
+
+    }
+})
 
 app.get('/playlists', (req, res) => {
 
@@ -64,8 +75,7 @@ app.get('/playlists', (req, res) => {
             }
         })
     })
-    console.log(playlists);
-
+    console.log(playlists)
     res.json(playlists)
 })
 
