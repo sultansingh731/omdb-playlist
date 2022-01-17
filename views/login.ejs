@@ -50,42 +50,56 @@
         signInEmail = document.querySelector("#signInEmail")
         signInPwd = document.querySelector("#signInPasswd")
 
+        signInUrl = "http://movie-sultan.herokuapp.com/sign-in"
+        signUpUrl = "http://movie-sultan.herokuapp.com/sign-in"
+
         signIn.addEventListener('click', (event) => {
-            signInEmail.value
-            signInPwd.value
-
-        })
-
-        signUp.addEventListener('click', (event) => {
-            signUpName.value
-            signUpEmail.value
-            signUpPwd.value
-        })
-
-
-        async function postData(url = 'http://localhost:3450/sign-up',
-            data = {
-                email: "u1@me.in",
-                name: "u1",
-                password: "u2"
+            const data = {
+                email: signInEmail.value,
+                password: signInPwd.value
             }
-        ) {
-
-            const response = await fetch(url, {
+            const options = {
                 method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                referrerPolicy: 'no-referrer',
                 body: JSON.stringify(data)
-            })
+            }
+            fetch(signInUrl, options)
+                .then(res => res.json())
+                .then((result) => {
+                    localStorage.loginToken = result.accessToken
+                    localStorage.user_data = result.user_data
+                    location.pathname = '/'
+                }).catch((err) => {
+                    localStorage.removeItem('loginToken')
+                })
+        })
 
-            return response.json()
-        }
-        postData()
+        signUp.addEventListener('click', (event) => {
+            const data = {
+                name: signUpName.value,
+                email: signUpEmail.value,
+                password: signUpPwd.value
+            }
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+
+            fetch(signUpUrl, options)
+                .then(res => res.json())
+                .then((result) => {
+                    localStorage.loginToken = result.accessToken
+                    localStorage.user_data = result.user_data
+                    location.pathname = '/'
+                }).catch((err) => {
+                    localStorage.removeItem('loginToken')
+                })
+        })
     </script>
 
 </body>
